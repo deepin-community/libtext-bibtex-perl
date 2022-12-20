@@ -1,0 +1,24 @@
+From: gregor herrmann <gregoa@debian.org>
+Date: Wed, 17 Jul 2019 15:27:53 -0300
+Subject: don't install into /usr/lib64 even if it exists
+
+Origin: vendor
+Bug-Debian: https://bugs.debian.org/905594
+Forwarded: not-needed
+Last-Update: 2019-07-16
+---
+ Build.PL | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Build.PL b/Build.PL
+index 18d3ecd..1b20844 100644
+--- a/Build.PL
++++ b/Build.PL
+@@ -65,6 +65,7 @@ my $builder = MyBuilder->new(
+ 
+ ## HACK  HACK  HACK  HACK
+ my $libdir = $builder->install_destination("bin");
++$libdir =~ s/\bbin\b/lib/; # ignores the lib64 hackery later
+ my $hdrdir = undef;
+ if ( $^O =~ /mswin32/i ) {
+     $libdir = undef;

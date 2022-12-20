@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	dh_auto_install
+	# move manpages. should be done via Module::Build but meh
+	mv -v $(CURDIR)/debian/tmp/usr/share/man/man1/* $(CURDIR)/debian/tmp/usr/share/man/man3/
+	rmdir --verbose --ignore-fail-on-non-empty $(CURDIR)/debian/tmp/usr/share/man/man1

@@ -1,0 +1,38 @@
+From: gregor herrmann <gregoa@debian.org>
+Date: Wed, 17 Jul 2019 15:27:53 -0300
+Subject: install manpages into section 3
+
+Origin: vendor
+Forwarded: no
+Last-Update: 2019-07-16
+---
+ inc/MyBuilder.pm | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/inc/MyBuilder.pm b/inc/MyBuilder.pm
+index 7597bdc..6e17718 100644
+--- a/inc/MyBuilder.pm
++++ b/inc/MyBuilder.pm
+@@ -177,18 +177,18 @@ sub ACTION_create_manpages {
+     my $version = $self->notes('btparse_version');
+     for my $pod (@$pods) {
+         my $man = $pod;
+-        $man =~ s!.pod!.1!;
++        $man =~ s!.pod!.3!;
+         $man =~ s!btparse/doc!blib/bindoc!;   ## FIXME - path
+         next if $self->up_to_date($pod, $man);
+         ## FIXME
+-        `pod2man --section=1 --center="btparse" --release="btparse, version $version" $pod $man`;
++        `pod2man --section=3 --center="btparse" --release="btparse, version $version" $pod $man`;
+     }
+ 
+     my $pod = 'btool_faq.pod';
+-    my $man = catfile('blib','bindoc','btool_faq.1');
++    my $man = catfile('blib','bindoc','btool_faq.3');
+     unless ($self->up_to_date($pod, $man)) {
+         ## FIXME
+-        `pod2man --section=1 --center="btparse" --release="btparse, version $version" $pod $man`;
++        `pod2man --section=3 --center="btparse" --release="btparse, version $version" $pod $man`;
+     }
+ }
+ 

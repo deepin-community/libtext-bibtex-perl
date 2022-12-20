@@ -1,0 +1,31 @@
+From: David Bremner <bremner@debian.org>
+Date: Sat, 3 Mar 2012 20:33:47 -0400
+Subject: disable rpath if installing into /usr/lib
+
+rpath isn't needed then, and setting has some undesirable
+side-effects, the more obvious being that it prevents relocating the
+libraries in the files system.
+---
+ inc/MyBuilder.pm | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/inc/MyBuilder.pm b/inc/MyBuilder.pm
+index 2725565..949aec2 100644
+--- a/inc/MyBuilder.pm
++++ b/inc/MyBuilder.pm
+@@ -224,8 +224,14 @@ sub ACTION_create_binaries {
+ 
+     print STDERR "\n** Creating binaries (",join(", ", map { $_.$EXEEXT } @BINARIES), ")\n";
+ 
++    my $rpath_arg = '';
++
++    if ( ($^O !~ /darwin/) && $btparselibdir ne "/usr/lib") {
++      $rpath_arg = "-Wl,-R${btparselibdir}";
++    }
++
+     my $extra_linker_flags = sprintf("-Lbtparse/src %s -lbtparse ",
+-                                     ($^O !~ /darwin/)?"-Wl,-R${btparselibdir}":"");
++				     $rpath_arg);
+ 
+     my @toinstall;
+ 

@@ -1,0 +1,99 @@
+From: David Bremner <bremner@debian.org>
+Date: Sat, 3 Mar 2012 15:23:40 -0400
+Subject: Introduce a btparse_api_version note and use it in definine the
+ SONAME.
+
+Most linux distributions require a versioned SONAME for all libraries
+in /usr/lib. This provides such an SONAME by defining the version in
+Build.PL.
+
+We also provide a symlink with unversioned name to make the linking of
+binaries to the shared library transparent.
+
+Arguably this should be defined in the C source of btparse, but since
+the version is taken from the perl module, this alternative is maybe
+more acceptable; it is certainly simpler than parsing another file in
+Build.PL.
+---
+ Build.PL         |  4 ++++
+ inc/MyBuilder.pm | 23 ++++++++++++++++++-----
+ 2 files changed, 22 insertions(+), 5 deletions(-)
+
+diff --git a/Build.PL b/Build.PL
+index 75d0b33..18d3ecd 100644
+--- a/Build.PL
++++ b/Build.PL
+@@ -103,6 +103,10 @@ else {
+     $hdrdir =~ s!/[^/]+/?$!/include!
+ }
+ $builder->notes( 'btparse_version' => $version );
++#
++# this should be increased everytime there is a non-upward compatible
++# change the library ABI.
++$builder->notes( 'btparse_api_version' => 2 );
+ $builder->notes( 'lib_path'        => $libdir );
+ $builder->add_build_element('usrlib');
+ $builder->install_path( 'usrlib'     => $libdir );
+diff --git a/inc/MyBuilder.pm b/inc/MyBuilder.pm
+index 8c6f6f9..2725565 100644
+--- a/inc/MyBuilder.pm
++++ b/inc/MyBuilder.pm
+@@ -15,7 +15,7 @@ use ExtUtils::Mkbootstrap;
+ 
+ use File::Spec::Functions qw.catdir catfile.;
+ use File::Path qw.mkpath.;
+-use Cwd 'abs_path';
++use Cwd;
+ 
+ my @EXTRA_FLAGS = ();
+ my @BINARIES = qw(biblex bibparse dumpnames);
+@@ -334,9 +334,14 @@ sub ACTION_create_library {
+ 
+ 
+     my $libbuilder = $self->notes('libbuilder');
++    my $APIVERSION = $self->notes('btparse_api_version');
+     my $LIBEXT = $libbuilder->{libext};
+ 
+-    print STDERR "\n** Creating libbtparse$LIBEXT\n";
++    my $symlink_exists = eval { symlink("",""); 1 };
++
++    my $SONAME= $symlink_exists ? "libbtparse$LIBEXT.$APIVERSION" : "libbtparse$LIBEXT";
++
++    print STDERR "\n** Creating $SONAME\n";
+ 
+     my @modules = qw:init input bibtex err scan error
+                      lex_auxiliary parse_auxiliary bibtex_ast sym
+@@ -346,15 +351,15 @@ sub ACTION_create_library {
+     my @objects = map { "btparse/src/$_.o" } @modules;
+ 
+     my $libpath = $self->notes('lib_path');
+-    $libpath = catfile($libpath, "libbtparse$LIBEXT");
+-    my $libfile = "btparse/src/libbtparse$LIBEXT";
++    $libpath = catfile($libpath, $SONAME);
++    my $libfile = "btparse/src/$SONAME";
+ 
+     my $extra_linker_flags = "";
+     if ($^O =~ /darwin/) {
+        my $abs_path = abs_path($libfile);
+        $extra_linker_flags = "-install_name $abs_path";
+     } elsif ($LIBEXT eq ".so") {
+-        $extra_linker_flags = "-Wl,-soname,libbtparse$LIBEXT";
++        $extra_linker_flags = "-Wl,-soname,$SONAME";
+     }
+ 
+     if (!$self->up_to_date(\@objects, $libfile)) {
+@@ -364,6 +369,14 @@ sub ACTION_create_library {
+                           extra_linker_flags => $extra_linker_flags);
+     }
+ 
++    if ($symlink_exists) {
++      my $olddir = getcwd;
++      chdir ("btparse/src");
++      unlink("libbtparse$LIBEXT");
++      symlink ($SONAME, "libbtparse$LIBEXT") or die("$!");
++      chdir ($olddir);
++    }
++
+     my $libdir = catdir($self->blib, 'usrlib');
+     mkpath( $libdir, 0, 0777 ) unless -d $libdir;
+ 

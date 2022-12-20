@@ -1,0 +1,4 @@
+btparse/src/bt_config.h  /usr/include
+btparse/src/btparse.h   /usr/include
+btparse/src/libbtparse.so /usr/lib
+usr/share/man/man3/*.3

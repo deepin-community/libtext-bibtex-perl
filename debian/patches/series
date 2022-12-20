@@ -1,0 +1,6 @@
+0001-Introduce-a-btparse_api_version-note-and-use-it-in-d.patch
+0002-disable-rpath-if-installing-into-usr-lib.patch
+0003-no-ldconfig.patch
+0004-manpage-section.patch
+0005-hardening-flags.patch
+0006-no-lib64.patch

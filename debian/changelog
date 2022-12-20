@@ -1,0 +1,304 @@
+libtext-bibtex-perl (0.88-deepin1) unstable; urgency=medium
+
+  * Rebuild
+
+ -- Deepin Packages Builder <packages@deepin.org>  Fri, 11 Nov 2022 18:00:01 +0800
+
+libtext-bibtex-perl (0.88-3) unstable; urgency=medium
+
+  * reupload to unstable
+
+ -- David Bremner <bremner@debian.org>  Tue, 13 Aug 2019 08:04:39 -0300
+
+libtext-bibtex-perl (0.88-2) experimental; urgency=medium
+
+  * Import upstream version 0.88.
+  * Refresh patches.
+  * Annotate test-only build dependencies with <!nocheck>.
+  * Declare compliance with Debian Policy 4.4.0.
+  * Bump debhelper-compat to 12.
+  * debian/watch: use uscan version 4.
+  * Remove trailing whitespace from debian/*.
+  * Update years of packaging copyright.
+
+  [ David Bremner ]
+  * bump SONAME to libbtparse2
+  * Add Build-Depends-Package to libbtparse2.symbols
+
+ -- David Bremner <bremner@debian.org>  Wed, 17 Jul 2019 18:08:05 -0300
+
+libtext-bibtex-perl (0.85-2) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Salvatore Bonaccorso ]
+  * Update Vcs-* headers for switch to salsa.debian.org
+
+  [ gregor herrmann ]
+  * Add patch to make sure that libbtparse.so.* is installed to /usr/lib and
+    not /usr/lib64, even if this exists, which is a policy violation (and
+    causes a build failure).
+    Thanks to Damyan Ivanov for detecting this bug when rebuilding in a chroot
+    created with 1.0.102+ which has the usrmerge-fix.
+    (Closes: #905594)
+  * Update years of packaging copyright.
+  * Declare compliance with Debian Policy 4.2.0.
+  * Bump debhelper compatibility level to 10.
+
+ -- gregor herrmann <gregoa@debian.org>  Mon, 06 Aug 2018 23:26:56 +0200
+
+libtext-bibtex-perl (0.85-1) unstable; urgency=medium
+
+  * Team upload.
+  * Import upstream version 0.85 (Closes: #873697).
+  * debian/patches:
+    + drop fix spelling patch, fixed upstream.
+    + update patch numbers.
+    + refresh offsets.
+
+ -- Nuno Carvalho <smash@cpan.org>  Thu, 31 Aug 2017 18:21:51 +0100
+
+libtext-bibtex-perl (0.83-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Nuno Carvalho ]
+  * Import upstream version 0.83.
+  * debian/control: declare compliance with Debian Policy 4.1.0.
+
+  [ gregor herrmann ]
+  * Refresh patches (offset).
+
+ -- Nuno Carvalho <ssmash@cpan.org>  Mon, 28 Aug 2017 19:57:23 +0100
+
+libtext-bibtex-perl (0.80-1) unstable; urgency=medium
+
+  * Team upload.
+  * Import upstream version 0.80.
+  * Refresh 0001-Fix-spelling-errors.patch and
+    0003-Introduce-a-btparse_api_version-note-and-use-it-in-d.patch (offset).
+  * Drop 0002-Use-the-right-path-of-perl.patch (fixed upstream).
+
+ -- gregor herrmann <gregoa@debian.org>  Sun, 18 Jun 2017 17:23:08 +0200
+
+libtext-bibtex-perl (0.78-1) unstable; urgency=medium
+
+  * Team upload.
+  * Import upstream version 0.78.
+  * Update years of packaging copyright.
+
+ -- gregor herrmann <gregoa@debian.org>  Fri, 13 Jan 2017 23:51:50 +0100
+
+libtext-bibtex-perl (0.77-1) unstable; urgency=medium
+
+  * Team upload.
+  * Remove Bas Zoetekouw from Uploaders. Thanks for your work!
+  * Import upstream version 0.77.
+  * Drop 0008-pod-errors.patch, applied upstream.
+  * Refresh remaining patches.
+
+ -- gregor herrmann <gregoa@debian.org>  Mon, 31 Oct 2016 21:01:10 +0100
+
+libtext-bibtex-perl (0.76-1) unstable; urgency=medium
+
+  * Team upload.
+  * Import upstream version 0.76.
+  * Update years of packaging copyright.
+  * Refresh existing patches.
+  * Add 0008-pod-errors.patch.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 09 Jul 2016 16:26:03 +0200
+
+libtext-bibtex-perl (0.74-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ gregor herrmann ]
+  * debian/copyright: change Copyright-Format 1.0 URL to HTTPS.
+  * debian/upstream/metadata: change GitHub/CPAN URL(s) to HTTPS.
+
+  [ Lucas Kanashiro ]
+  * Import upstream version 0.74
+
+ -- Lucas Kanashiro <kanashiro.duarte@gmail.com>  Fri, 17 Jun 2016 14:09:21 -0300
+
+libtext-bibtex-perl (0.72-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ gregor herrmann ]
+  * Rename autopkgtest configuration file(s) as per new pkg-perl-
+    autopkgtest schema.
+
+  [ Salvatore Bonaccorso ]
+  * debian/control: Use HTTPS transport protocol for Vcs-Git URI
+
+  [ Lucas Kanashiro ]
+  * Import upstream version 0.72
+  * Update years of Debian packaging copyright
+  * Declare compliance with Debian policy 3.9.8
+  * debian/rules: export DEB_BUILD_MAINT_OPTIONS = hardening=+bindnow
+  * Update patch fixing typo errors
+
+ -- Lucas Kanashiro <kanashiro.duarte@gmail.com>  Mon, 25 Apr 2016 14:03:01 -0300
+
+libtext-bibtex-perl (0.71-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Lucas Kanashiro ]
+  * Import upstream version 0.71
+    Fixes "syntactically invalid BibTeX file crashes perl"
+    (Closes: #691715)
+  * Declare compliance with Debian policy 3.9.6
+  * Set year of upstream copyright
+
+  [ gregor herrmann ]
+  * Add new versioned (build) dependency.
+  * Refresh 0003-Introduce-a-btparse_api_version-note-and-use-it-
+    in-d.patch (offset).
+
+ -- Lucas Kanashiro <kanashiro.duarte@gmail.com>  Sat, 15 Aug 2015 04:41:51 -0300
+
+libtext-bibtex-perl (0.70-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Salvatore Bonaccorso ]
+  * Update Vcs-Browser URL to cgit web frontend
+
+  [ gregor herrmann ]
+  * Add debian/upstream/metadata
+  * Imported upstream version 0.70
+  * Add autopkgtest control file.
+  * Refresh 0003-Introduce-a-btparse_api_version-note-and-use-it-
+    in-d.patch (offset).
+  * Explicitly build-depend on libmodule-build-perl.
+  * debian/tests/control: add stanza for new runtime-deps-and-recommends
+    tests.
+  * Drop debian/tests/control, add Testsuite field to debian/control
+    instead.
+
+  [ Niko Tyni ]
+  * Include btparse/tests/data in autopkgtest runs.
+
+ -- Niko Tyni <ntyni@debian.org>  Wed, 27 May 2015 22:50:59 +0300
+
+libtext-bibtex-perl (0.69-1) unstable; urgency=low
+
+  * Team upload.
+  * New upstream release.
+  * Strip trailing slash from metacpan URLs.
+  * Drop 0008-hurd.diff, merged upstream.
+  * Refresh a couple of other patches (offset).
+  * Add new symbol to debian/libbtparse1.symbols.
+  * 0007-hardening-flags.patch: drop upstream's -D_FORTIFY_SOURCE=1 which
+    conflicts with Debian's -D_FORTIFY_SOURCE=2, and probably is a debug
+    attempt (cf. CPAN RT#80458).
+  * Don't hardcode /usr/lib/perl5 in debian/*.install as a preparation for
+    the multi-arched perl 5.20.
+    Closes: #752713
+
+ -- gregor herrmann <gregoa@debian.org>  Thu, 26 Jun 2014 19:27:31 +0200
+
+libtext-bibtex-perl (0.66-2) unstable; urgency=medium
+
+  * Team upload.
+  * Add patch to fix FTBFS on Hurd. Thanks to Pino Toscano for the bug
+    report and the patch. (Closes: #734352)
+  * Update years of packaging copyright.
+  * Declare compliance with Debian Policy 3.9.5.
+
+ -- gregor herrmann <gregoa@debian.org>  Sun, 19 Jan 2014 18:51:20 +0100
+
+libtext-bibtex-perl (0.66-1) unstable; urgency=low
+
+  [ David Bremner ]
+  * New upstream release
+
+  [ gregor herrmann ]
+  * debian/copyright: add section about files with a different license.
+  * Bump Standards-Version to 3.9.4 (no changes).
+  * New patch 0007-hardening-flags.patch: add $ENV{LDFLAGS} when linking
+    the library.
+
+  [ Salvatore Bonaccorso ]
+  * Change Vcs-Git to canonical URI (git://anonscm.debian.org)
+  * Change search.cpan.org based URIs to metacpan.org based URIs
+
+  [ Danai SAE-HAN (韓達耐) ]
+  * Release.  Thank you all.
+
+ -- Danai SAE-HAN (韓達耐) <danai@debian.org>  Fri, 30 Aug 2013 12:52:47 +0800
+
+libtext-bibtex-perl (0.64-1) unstable; urgency=low
+
+  * Team upload.
+
+  [ gregor herrmann ]
+  * debian/control: update {versioned,alternative} (build) dependencies.
+
+  [ Nuno Carvalho ]
+  * New upstream release.
+
+ -- Nuno Carvalho <smash@cpan.org>  Tue, 10 Jul 2012 14:44:27 +0100
+
+libtext-bibtex-perl (0.63-1) unstable; urgency=low
+
+  * Team upload.
+  * New upstream release.
+  * debian/copyright: update Upstream-Contact field.
+  * Use debhelper 9.20120312 to get all hardening flags.
+
+ -- gregor herrmann <gregoa@debian.org>  Sat, 02 Jun 2012 20:03:02 +0200
+
+libtext-bibtex-perl (0.62-1) unstable; urgency=low
+
+  [ Julián Moreno Patiño ]
+  * Patch to fix spelling error.
+  * Patch to use the right path of perl in the example file.
+  * Bump Standards-Version to 3.9.3 (no changes).
+
+  [ gregor herrmann ]
+  * Take over for the Debian Perl Group on maintainer's request
+    (http://lists.debian.org/debian-perl/2011/08/msg00107.html)
+  * debian/control: Added: Vcs-Git field (source stanza); Vcs-Browser
+    field (source stanza). Changed: Maintainer set to Debian Perl Group
+    <pkg-perl-maintainers@lists.alioth.debian.org> (was: Bas Zoetekouw
+    <bas@debian.org>); Bas Zoetekouw <bas@debian.org> moved to
+    Uploaders.
+  * New upstream releases 0.61, 0.62. (Closes: #599485, #578633)
+  * Remove patch that changed Makefile.PL. Doesn't apply anymore.
+  * Update Homepage field.
+  * Update build dependencies.
+  * Use tiny debian/rules, and debhelper 9 compat level.
+  * Switch to source format 3.0 (quilt).
+  * Install examples.
+  * Update debian/copyright to copyright-format 1.0.
+  * Add a patch to make sure ldconfig is not run during package build.
+  * Extend long description for libtext-bibtex-perl.
+  * Add a patch to fix the manpage section, and install the manpages.
+
+  [ David Bremner ]
+  * Build separate binary packages for libbtparse1
+  * New patches:
+    - Add a versioned SONAME
+    - Disable rpath
+
+ -- David Bremner <bremner@debian.org>  Sun, 04 Mar 2012 10:54:55 -0400
+
+libtext-bibtex-perl (0.38-1) unstable; urgency=low
+
+  * New upstream release:
+    - fixed problem when creating an empty Entry.
+    - added support for 'conference' key (alias for inproceedings)
+  * Move to policy version 3.8.2
+    - add Homepage field to control file
+
+ -- Bas Zoetekouw <bas@debian.org>  Tue, 30 Jun 2009 12:06:35 +0200
+
+libtext-bibtex-perl (0.36-1) unstable; urgency=low
+
+  * Initial release (closes: #361429)
+
+ -- Bas Zoetekouw <bas@debian.org>  Sat,  8 Apr 2006 17:18:40 +0200

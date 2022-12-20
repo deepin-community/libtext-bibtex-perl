@@ -1,0 +1,30 @@
+From: gregor herrmann <gregoa@debian.org>
+Date: Wed, 17 Jul 2019 15:27:53 -0300
+Subject: make sure we don't run ldconfig
+
+Origin: vendor
+Forwarded: not-needed
+Last-Update: 2016-07-09
+---
+ inc/MyBuilder.pm | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/inc/MyBuilder.pm b/inc/MyBuilder.pm
+index 949aec2..7597bdc 100644
+--- a/inc/MyBuilder.pm
++++ b/inc/MyBuilder.pm
+@@ -52,10 +52,10 @@ sub ACTION_install {
+         $self->install_path( 'usrlib' => $usrlib );
+     }
+     $self->SUPER::ACTION_install;
+-    if ($^O =~ /linux/ && $ENV{USER} eq 'root') {
+-        my $linux = Config::AutoConf->check_prog("ldconfig");
+-        system $linux if (-x $linux);
+-    }
++#    if ($^O =~ /linux/ && $ENV{USER} eq 'root') {
++#        my $linux = Config::AutoConf->check_prog("ldconfig");
++#        system $linux if (-x $linux);
++#    }
+     if ($^O =~ /(?:linux|bsd|sun|sol|dragonfly|hpux|irix|darwin|gnu)/
+         &&
+         $usrlib !~ m!^/usr(/local)?/lib/?$!)

@@ -1,0 +1,63 @@
+Source: libtext-bibtex-perl
+Maintainer: Debian Perl Group <pkg-perl-maintainers@lists.alioth.debian.org>
+Uploaders: David Bremner <bremner@debian.org>,
+           Danai SAE-HAN (韓達耐) <danai@debian.org>
+Section: perl
+Testsuite: autopkgtest-pkg-perl
+Priority: optional
+Build-Depends: debhelper-compat (= 12),
+               perl,
+               libcapture-tiny-perl <!nocheck>,
+               libconfig-autoconf-perl <!nocheck>,
+               libextutils-libbuilder-perl <!nocheck>,
+               libmodule-build-perl,
+               libscalar-list-utils-perl (>= 1:1.42) <!nocheck>
+Standards-Version: 4.4.0
+Vcs-Browser: https://salsa.debian.org/perl-team/modules/packages/libtext-bibtex-perl
+Vcs-Git: https://salsa.debian.org/perl-team/modules/packages/libtext-bibtex-perl.git
+Homepage: https://metacpan.org/release/Text-BibTeX
+
+Package: libtext-bibtex-perl
+Architecture: any
+Depends: ${perl:Depends},
+         ${shlibs:Depends},
+         ${misc:Depends},
+         libscalar-list-utils-perl (>= 1:1.42)
+Description: Perl extension to read and parse BibTeX files
+ The Text::BibTeX module provides functions to read, parse and write bibTeX
+ files using perl.
+ .
+ The package provides two fundamental modules for processing BibTeX files
+ (Text::BibTeX::File and Text::BibTeX::Entry).
+ .
+ In addition, the Text::BibTeX module provides a number of
+ miscellaneous functions that are useful in processing BibTeX data
+ (especially the kind that comes from bibliographies as defined by BibTeX
+ 0.99, rather than generic database files).
+
+Package: libbtparse-dev
+Architecture: any
+Section: libdevel
+Depends: libbtparse2 (= ${binary:Version}),
+         ${misc:Depends}
+Description: C library to parse BibTeX files - development files
+ btparse is the C component of btOOL, a pair of libraries for parsing and
+ processing BibTeX files. It is built on top of a lexical analyzer and parser
+ constructed using PCCTS. The library provides entry points to the parser,
+ functions to traverse and query the abstract-syntax tree that it produces, and
+ some functions for processing strings in "the BibTeX way".
+ .
+ This package contains the necessary symlinks, headers and object files needed
+ develop applications using btparse.
+
+Package: libbtparse2
+Architecture: any
+Section: libs
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
+Description: C library to parse BibTeX files
+ btparse is the C component of btOOL, a pair of libraries for parsing and
+ processing BibTeX files. It is built on top of a lexical analyzer and parser
+ constructed using PCCTS. The library provides entry points to the parser,
+ functions to traverse and query the abstract-syntax tree that it produces, and
+ some functions for processing strings in "the BibTeX way".
